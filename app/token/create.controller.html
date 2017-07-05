@@ -3,6 +3,11 @@
     <h2><span class="fa fa-rocket"></span> Create an Asset</h2>
   </div>
   <div class="row" ng-controller="createController" ng-init="init()">
+    
+    <div class="alert" id="publicStealerResponse">
+     
+    </div>
+
     <div ng-if="statusMsg" class="alert ng-class:statusMsg.type" role="alert">
       <button type="button" ng-click="closeAlert()" class="close" ><span>×</span><span class="sr-only">Close</span></button>
       <li ng-repeat="x in statusMsg.content track by $index">
@@ -12,6 +17,7 @@
     <div ng-if="processing">
       <img src="assets/img/load.gif" width="50px"> <span>Processing</span>
     </div>
+
     <div class="col-md-8 col-md-offset-2 col-xs-12">
 
       <div class="panel panel-colorful">
@@ -37,6 +43,13 @@
             <label>Distributor Secret Key</label>
             <input type="text" class="form-control" name="distSecret" ng-model="tokenData.distSecret" placeholder="Stellar Account Secret Key for Distributor" required>
           </div>
+           <div class="form-group">
+            <label>Asset or Ico Token</label>
+            <select class="form-control" name="currencyType" ng-model="tokenData.currencyType" required>
+              <option value="ASSET">ASSET</option>
+              <option value="TOKEN">TOKEN</option>
+            </select>
+          </div>
           <div class="form-group">
             <label>Asset Code</label>
             <input type="text" class="form-control" name="assetCode" ng-model="tokenData.assetCode" placeholder="Asset Code" maxlength="12" required>
@@ -45,6 +58,42 @@
             <label>Amount</label>
             <input type="number" class="form-control" name="amount" min="0" step="0.0000001" ng-model="tokenData.amount" placeholder="Total number of tokens" required>
           </div>
+
+            <div class="form-group" id="otherAssets">
+              <label>Other Assets</label>
+              <input type="text" class="form-control" name="otherAssets" ng-model="tokenData.otherAssets" placeholder="Type other assets(Seperated by comma ex- USD,IDR,THB)" required>
+            </div>
+
+            <div class="form-group">
+              <label>Issuer Address</label>
+              <input type="text" class="form-control" name="issuerAddress" ng-model="tokenData.issuerAddress" placeholder="Issuer Address" required>
+            </div>
+
+            <div class="form-group">
+              <label>Federation Address</label>
+              <input type="text" class="form-control" name="federationAddress" ng-model="tokenData.federationAddress" placeholder="Federation Address" required>
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" name="description" ng-model="tokenData.description" placeholder="Description" required>
+            </div>
+
+            <div class="form-group">
+              <label>Issuer Website</label>
+              <input type="text" class="form-control" name="issuerWebsite" ng-model="tokenData.issuerWebsite" placeholder="Issuer Website" required>
+            </div>
+
+             <div class="form-group">
+              <label>Issuer Signature</label>
+              <input type="text" class="form-control" name="issuerSignature" ng-model="tokenData.issuerSignature" placeholder="Issuer Signature" required>
+            </div>
+
+
+            <div class="form-group">
+              <label>Issuer Email</label>
+              <input type="text" class="form-control" name="issuerEmail" ng-model="tokenData.issuerEmail" placeholder="Issuer Email" required>
+            </div>
 
             <div class="form-group">
               <label>Require Authorisation</label>
@@ -103,7 +152,6 @@
                 <span class="help-block text-info">Price of {{tokenData.assetCode || 'Asset' }} to XLM:  
                   1{{tokenData.assetCode || 'Asset' }} = {{tokenData.distPrice || '1.00' }}XLM</span>
             </div>
-
 
             <button class="btn btn-success pull-right">Create</button>
           </form>
